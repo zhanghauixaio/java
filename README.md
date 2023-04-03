@@ -2,4 +2,4 @@ redisson
 ehcache
 jjwt
 
-oshi 系统数据
+oshi 绯荤粺淇℃伅
