@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.mybatis.mapper.CategoryMapper">
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+    <select id="selectCategoryById" resultType="com.seven.excel.Category">
+        select * from category
+        <where>
+            <if test="i!= null">
+                id = #{i}
+            </if>
+        </where>
+    </select>
+    <!--<select id="selectMap" resultMap="resMap">-->
+    <!--    select id, name from category-->
+    <!--</select>-->
+    <!--<resultMap id="resMap" type="com.seven.mybatis.vo.Material">-->
+    <!--    <result property="materialName" column="name"/>-->
+    <!--    <collection property="category" javaType="java.util.List" ofType="map">-->
+    <!--        <result property="sn" column="sn"/>-->
+    <!--        <result property="name" column="name"/>-->
+    <!--    </collection>-->
+    <!--</resultMap>-->
+</mapper>

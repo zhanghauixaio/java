@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
-         updateCheck="false">
-    <diskStore path="java.io.tmpdir/Tmp_EhCache" />
+         updateCheck="false" dynamicConfig="false">
+    <diskStore path="tmp/Tmp_EhCache" />
 
     <!-- defaultCache，是默认的缓存策略 -->
     <!-- 如果你指定的缓存策略没有找到，那么就用这个默认的缓存策略 -->

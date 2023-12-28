@@ -1,6 +1,22 @@
 package com;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Test {
+    private static final Map<String, String> hashMap = new HashMap<>();
+    static {
+        final Map<String, String> map = new HashMap<>();
+
+        for (int i = 0; i < 10; i++) {
+            map.put(String.valueOf(i), String.valueOf(i));
+        }
+        hashMap.putAll(map);
+    }
 
     public static void main(String[] args) {
 //        Jedis jedis = new Jedis("localhost",6379);
@@ -12,7 +28,10 @@ public class Test {
 //        Iterator iterator = set.iterator();
 
 
-
-
+        String s = "行哈理工";
+        System.out.println(Character.isLetter(s.charAt(0)));
+        System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                .format(LocalDate.MIN));
+        System.out.println(LocalDateTime.MIN.isAfter(LocalDateTime.now()));
     }
 }
