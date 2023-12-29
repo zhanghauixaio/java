@@ -24,8 +24,8 @@ public class Mybatis {
             sqlSession = sqlSessionFactory.openSession();
             CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
             System.out.println(categoryMapper.selectCategoryById(1));
-            System.out.println(categoryMapper.selectCategoryById(1));
-            System.out.println(categoryMapper.selectCategoryById(1));
+            // System.out.println(categoryMapper.selectCategoryById(1));
+            System.out.println(categoryMapper.pagination(1, 10));
             // Map<String, Object> map = categoryMapper.selectMap();
         }finally {
             sqlSession.close();

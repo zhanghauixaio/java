@@ -10,6 +10,9 @@
             </if>
         </where>
     </select>
+    <select id="pagination" resultType="com.seven.excel.Category">
+        select id, name from category limit #{offset}, #{limit}
+    </select>
     <!--<select id="selectMap" resultMap="resMap">-->
     <!--    select id, name from category-->
     <!--</select>-->
