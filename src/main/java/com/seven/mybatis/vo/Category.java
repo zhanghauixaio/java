@@ -1,5 +1,6 @@
 package com.seven.mybatis.vo;
 
+import com.seven.mybatis.enums.TypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 

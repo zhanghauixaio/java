@@ -1,6 +1,7 @@
 package com.seven.mybatis;
 
-import com.seven.excel.Category;
+import com.seven.mybatis.vo.Category;
+import com.seven.mybatis.enums.TypeEnum;
 import com.seven.mybatis.mapper.CategoryMapper;
 import lombok.SneakyThrows;
 import org.apache.ibatis.io.Resources;
@@ -23,9 +24,15 @@ public class Mybatis {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             sqlSession = sqlSessionFactory.openSession();
             CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-            System.out.println(categoryMapper.selectCategoryById(1));
+            // Category category = new Category();
+            // category.setId("00");
+            // category.setSn("00");
+            // category.setName("YES");
+            // categoryMapper.insertCategory(category);
+            // sqlSession.commit();
+            System.out.println(categoryMapper.selectCategoryById("4").toString());
             // System.out.println(categoryMapper.selectCategoryById(1));
-            System.out.println(categoryMapper.pagination(1, 10));
+            // System.out.println(categoryMapper.pagination(1, 10));
             // Map<String, Object> map = categoryMapper.selectMap();
         }finally {
             sqlSession.close();

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seven.mybatis.mapper.CategoryMapper">
+    <insert id="insertCategory" parameterType="com.seven.mybatis.vo.Category">
+        insert into category (id, sn, name) values (#{id}, #{sn}, #{name})
+    </insert>
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-    <select id="selectCategoryById" resultType="com.seven.excel.Category">
+    <select id="selectCategoryById" resultType="com.seven.mybatis.vo.Category">
         select * from category
         <where>
             <if test="i!= null">
@@ -10,7 +13,7 @@
             </if>
         </where>
     </select>
-    <select id="pagination" resultType="com.seven.excel.Category">
+    <select id="pagination" resultType="com.seven.mybatis.vo.Category">
         select id, name from category limit #{offset}, #{limit}
     </select>
     <!--<select id="selectMap" resultMap="resMap">-->
