@@ -11,7 +11,7 @@ public class TestOfType {
     @Test
     public void testTypeVariable() {
         //****************************TypeVariable************************
-        Type type = Dog.class.getGenericSuperclass();
+        Type type = BlackDog.class.getGenericSuperclass();
         System.out.println(type);
         System.out.println(type.getTypeName());
         if (type instanceof ParameterizedType) {

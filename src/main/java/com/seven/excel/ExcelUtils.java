@@ -5,6 +5,8 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.alibaba.excel.write.metadata.style.WriteCellStyle;
+import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.google.common.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,5 +85,11 @@ public class ExcelUtils {
                 e.printStackTrace();
             }
         }
+    }
+
+    private HorizontalCellStyleStrategy horizontalCellStyleStrategy() {
+        WriteCellStyle writeCellStyle = new WriteCellStyle();
+        writeCellStyle.setWrapped(true);
+        return new HorizontalCellStyleStrategy(null, writeCellStyle);
     }
 }

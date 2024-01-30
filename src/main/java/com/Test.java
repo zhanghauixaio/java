@@ -26,12 +26,16 @@ public class Test {
 //        System.out.println(jedis.get("jedis"));
 //        LinkedHashSet set = new LinkedHashSet();
 //        Iterator iterator = set.iterator();
-
+        Map<String, String> map = new HashMap<>(256);
 
         String s = "行哈理工";
-        System.out.println(Character.isLetter(s.charAt(0)));
-        System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                .format(LocalDate.MIN));
-        System.out.println(LocalDateTime.MIN.isAfter(LocalDateTime.now()));
+        for (int i = 0; i < 9000000; i++) {
+            map.put(String.valueOf(i),s);
+        }
+        System.out.println(map.size());
+        // System.out.println(Character.isLetter(s.charAt(0)));
+        // System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        //         .format(LocalDate.MIN));
+        // System.out.println(LocalDateTime.MIN.isAfter(LocalDateTime.now()));
     }
 }
