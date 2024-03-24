@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a551c2bf-66f8-4531-8cc2-0f6f069b539c">
+	<property name="ireport.zoom" value="1.5026296018031553"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="136"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="index" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="workOrderNo" class="java.lang.String">
+		<fieldDescription><![CDATA[workOrderNo]]></fieldDescription>
+	</field>
+	<field name="finishProductCode" class="java.lang.String">
+		<fieldDescription><![CDATA[finishProductCode]]></fieldDescription>
+	</field>
+	<field name="trayQty" class="java.lang.String">
+		<fieldDescription><![CDATA[trayQty]]></fieldDescription>
+	</field>
+	<field name="currentGear" class="java.lang.String">
+		<fieldDescription><![CDATA[currentGear]]></fieldDescription>
+	</field>
+	<field name="netWeight" class="java.lang.String">
+		<fieldDescription><![CDATA[netWeight]]></fieldDescription>
+	</field>
+	<field name="packingSize" class="java.lang.String">
+		<fieldDescription><![CDATA[packingSize]]></fieldDescription>
+	</field>
+	<field name="powerGear" class="java.lang.String">
+		<fieldDescription><![CDATA[powerGear]]></fieldDescription>
+	</field>
+	<field name="trayNo" class="java.lang.String">
+		<fieldDescription><![CDATA[trayNo]]></fieldDescription>
+	</field>
+	<field name="grossWeight" class="java.lang.String">
+		<fieldDescription><![CDATA[grossWeight]]></fieldDescription>
+	</field>
+	<field name="moduleType" class="java.lang.String">
+		<fieldDescription><![CDATA[moduleType]]></fieldDescription>
+	</field>
+	<field name="barcodes" class="java.util.List">
+		<fieldDescription><![CDATA[barcodes]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="244" splitType="Stretch">
+			<image>
+				<reportElement key="image" x="41" y="19" width="108" height="87" uuid="5e9c50c7-c6d6-426e-84fd-8caa7a3d5e24"/>
+				<imageExpression><![CDATA["C:\\Users\\hh\\Documents\\IReport\\red.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="179" y="19" width="376" height="89" forecolor="#000000" backcolor="#FFFFFF" uuid="06b207d3-e1c2-4d32-8d3a-276135941870"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="28" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[产品名称：太阳能组件]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="126" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="180" y="-81" width="187" height="20" uuid="c55ca687-e882-4e60-ab6b-5321550ff9ee"/>
+				<textElement textAlignment="Center">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moduleType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" x="0" y="-120" width="179" height="39" uuid="45e1b0a1-3899-4bc4-8977-861d84cad0f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[功率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="180" y="-120" width="188" height="39" uuid="950372e7-a9b9-4939-84be-3dff03a5eaac"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="180" y="-120" width="187" height="39" uuid="606e4821-bbe9-4af3-aec4-3180a414071e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{powerGear}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" x="367" y="-120" width="188" height="39" uuid="5b673ea4-4e00-44d6-b5e5-34bd31adf3fd"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="368" y="-120" width="187" height="18" uuid="4a1ad39a-0637-4ddb-a756-33d2b943bbbe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[工单号]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="367" y="-101" width="188" height="20" uuid="ebd98b63-e1de-4d85-822b-1832c4e1af08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{workOrderNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" x="0" y="-81" width="179" height="20" uuid="ef4e000b-f75a-464f-951b-e06cc5cdfe3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[组件类型]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="12" y="63" width="100" height="20" uuid="ff2b0e8f-ebe0-49ad-9ed2-43db617915c2"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="0" y="-61" width="179" height="20" uuid="b1c6a454-e7a9-49d3-81fa-551e62b68b4b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[电流档位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="180" y="-81" width="187" height="20" uuid="00a5aa5a-267c-4196-9031-954145d3d941"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="180" y="-61" width="187" height="20" uuid="a2e4b872-fadb-4be2-b0a9-e8ee270590cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="181" y="-61" width="187" height="20" uuid="379a6978-a3e1-4eab-9520-b89d33a7adf4"/>
+				<textElement textAlignment="Center">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currentGear}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" x="368" y="-81" width="187" height="18" uuid="ae64bb27-e6dc-4a1f-84b0-6447b709e552"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[托盘号]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="367" y="-63" width="188" height="22" uuid="53e7f752-e67d-4a3a-8114-882c0b1aadc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{trayNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" x="0" y="-41" width="555" height="30" uuid="a7cb4de0-2710-421f-91c7-82defebc2a15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[组件条码一览表]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="12" y="11" width="63" height="27" uuid="403765cf-9fa5-40b1-9065-d20815bd806c"/>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{trayNo}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
