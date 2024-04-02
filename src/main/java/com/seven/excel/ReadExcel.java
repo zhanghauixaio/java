@@ -5,13 +5,12 @@ import com.seven.utils.AsposeUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.Units;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 
@@ -33,18 +32,23 @@ public class ReadExcel {
     @SneakyThrows
     @Test
     public void readExcel() {
-        File file = new File("src/main/resources/office/国际模板.xlsx");
-        String outPath = "src/main/resources/office/国际唛头格式说明out";
+        // File file = new File("src/main/resources/office/国际模板.xlsx");
+        File file = new File("src/main/resources/office/国内模板1.xls");
+        String outPath = "src/main/resources/office/国内唛头格式说明out";
         Map<String, Object> map = new HashMap<>();
         map.put("{powerGear}", "580M");
         map.put("{workOrderNo}", "O12434");
         map.put("{moduleType}", "MD-HHAFG");
         map.put("{currentGear}", "H");
         map.put("{trayNo}", "20240323Y1004");
-        map.put("{pic0}", "C:/home/zxing4.png");
+        map.put("{pic0}", "C:/home/barcode1.png");
         map.put("{pic1}", "C:/home/zxing4.png");
         map.put("{code1}", "20240323Y1004");
         map.put("{pic2}", null);
+        map.put("{pic13}", "C:/home/zxing4.png");
+        map.put("{code13}", "20240323Y1004");
+        map.put("{pic25}", "C:/home/zxing4.png");
+        map.put("{code25}", "20240323Y1004");
         map.put("{packingSize}", "123*143*343");
         map.put("{netWeight}", "1234.7");
         map.put("{grossWeight}", "124");
@@ -59,6 +63,8 @@ public class ReadExcel {
             workbook = new HSSFWorkbook(inputStream);
             outPath = outPath + ".xls";
         }
+        // 默认字体
+        log.info("第一个字体：" + workbook.getFontAt(0));
         sheet = workbook.getSheetAt(0);
         Drawing<?> drawing = sheet.createDrawingPatriarch();
 
@@ -83,45 +89,82 @@ public class ReadExcel {
                                 Path path1 = Paths.get(path);
                                 InputStream input = Files.newInputStream(path1);
                                 BufferedImage image = ImageIO.read(input);
-                                int width = Units.pixelToEMU(image.getWidth());
-                                int height = Units.pixelToEMU(image.getHeight());
-                                log.info("图片宽：" + width);
-                                log.info("图片高：" + height);
+                                // int width = Units.pixelToEMU(image.getWidth());
+                                // int height = Units.pixelToEMU(image.getHeight());
+                                // log.info("图片宽EMU：" + width);
+                                // log.info("图片高EMU：" + height);
+                                // 真实行高（准确）
+                                float heightInPoints = row.getHeightInPoints();
+                                log.info("行point: " + heightInPoints);
+                                // int heightEMU = Units.toEMU(heightInPoints);
+                                // log.info("行Point EMU" + heightEMU);
+                                // 真实列宽（多一点）
                                 log.info("列宽" + sheet.getColumnWidth(cell.getColumnIndex()));
-                                log.info("行高" + row.getHeightInPoints());
-                                log.info("列像素: " + sheet.getColumnWidthInPixels(cell.getColumnIndex()));
-                                int pixelToEMU = Units.pixelToEMU((int) sheet.getColumnWidthInPixels(cell.getColumnIndex()));
-                                int widthToEMU = Units.columnWidthToEMU(sheet.getColumnWidth(cell.getColumnIndex()));
-                                log.info("列宽EMU: " + widthToEMU);
-                                log.info("列像素EMU: " + pixelToEMU);
-                                int heightEMU = Units.toEMU(row.getHeightInPoints());
-                                log.info("行Point EMU" + heightEMU);
-                                // float cellWidth = sheet.getColumnWidthInPixels(cell.getColumnIndex());
-                                // float cellHeight = (row.getHeightInPoints() / 72) * 96;
-                                // int dx1 = (int) ((cellWidth - width) / 2 / 96 * 72);
-                                // int dy1 = (int) ((cellHeight - height) / 2 / 96 * 72);
-                                // int dx2 = (int) ((cellWidth + width) / 2 / 96 * 72);
-                                // int dy2 = (int) (cellHeight + height) / 2 / 96 * 72;
+                                int widthPoint = sheet.getColumnWidth(cell.getColumnIndex()) / 256;
+                                log.info("列point: " + widthPoint);
+                                // log.info("列像素: " + sheet.getColumnWidthInPixels(cell.getColumnIndex()));
+                                // log.info("列point: " + Units.pixelToPoints(sheet.getColumnWidthInPixels(cell.getColumnIndex())));
+                                // int pixelToEMU = Units.pixelToEMU((int) sheet.getColumnWidthInPixels(cell.getColumnIndex()));
+                                // int widthToEMU = Units.columnWidthToEMU(sheet.getColumnWidth(cell.getColumnIndex()));
+                                // log.info("列宽EMU: " + widthToEMU);
+                                // log.info("列像素EMU: " + pixelToEMU);
                                 // 拿到合并单元格的列宽
-                                if (i == 5 && j == 6) {
-                                    for (int k = 7; k < row.getLastCellNum(); k++) {
-                                        pixelToEMU += Units.pixelToEMU((int) sheet.getColumnWidthInPixels(k));
+                                int value = getValue(sheet, cell.getRowIndex(), cell.getColumnIndex());
+                                log.info("合并单元格最后的index: " + value);
+                                int firstColumnIndex = cell.getColumnIndex();
+                                int secondColumnIndex = firstColumnIndex + 1;
+                                if (value != 0) {
+                                    for (int k = cell.getColumnIndex(); k < value; k++) {
+                                        widthPoint += sheet.getColumnWidth(k) / 256;
+                                        // pixelToEMU += Units.pixelToEMU((int) sheet.getColumnWidthInPixels(k));
                                     }
-                                    log.info("合并单元格列宽：" + pixelToEMU);
+                                    secondColumnIndex = value;
+                                    // log.info("合并单元格列宽：" + pixelToEMU);
+                                    log.info("合并单元格列point: " + widthPoint);
                                 }
-                                int dx1 = (pixelToEMU - width) / 2;
-                                int dy1 = (heightEMU - height) / 2;
-                                // ClientAnchor anchor = drawing.createAnchor(dx1, dy1, dx2, dy2, cell.getColumnIndex(), cell.getRowIndex(), cell.getColumnIndex() + 1, cell.getRowIndex() + 1);
-                                ClientAnchor anchor = drawing.createAnchor(dx1, dy1, 0, 0, cell.getColumnIndex(), cell.getRowIndex(), cell.getColumnIndex() + 1, cell.getRowIndex() + 1);
-                                anchor.setAnchorType(ClientAnchor.AnchorType.MOVE_DONT_RESIZE);
+                                double width = Units.pixelToPoints(image.getWidth());
+                                double height = Units.pixelToPoints(image.getHeight());
+                                log.info("图片宽point：" + width);
+                                log.info("图片高point：" + height);
+                                List<Integer> list = insertImage(width, height, widthPoint, heightInPoints);
+                                int dx1 = 0;
+                                int dy1 = 20;
+                                int dx2 = 0;
+                                int dy2 = 0;
+                                if (outPath.endsWith(".xlsx")){
+                                    dx1 = Units.toEMU(dx1);
+                                    dy1 = Units.toEMU(dy1);
+                                }
+                                // if (i == 6) {
+                                //     dx1 = 1023;
+                                // }
+                                if (j == 1 || j == 8) {
+                                    dx1 = 200;
+                                }
+                                if (j == 4) {
+                                    dx1 = 400;
+                                }
+                                if ("{pic0}".equals(stringCellValue)) {
+                                    dx1 = 100;
+                                    dy1 = 30;
+                                    firstColumnIndex = 8;
+                                }
+                                ClientAnchor anchor = drawing.createAnchor(dx1, dy1, 0, 0, firstColumnIndex, cell.getRowIndex(), secondColumnIndex, cell.getRowIndex() + 1);
+                                anchor.setAnchorType(ClientAnchor.AnchorType.MOVE_AND_RESIZE);
                                 InputStream input1 = Files.newInputStream(path1);
                                 int picIndex = workbook.addPicture(IOUtils.toByteArray(input1), Workbook.PICTURE_TYPE_PNG);
                                 log.info("picIndex" + picIndex);
                                 Picture picture = drawing.createPicture(anchor, picIndex);
-                                picture.resize();
+                                if ("{pic0}".equals(stringCellValue)) {
+                                    picture.resize(0.8, 0.9);
+                                } else {
+                                    picture.resize();
+                                }
                                 cell.setCellValue("");
                                 input1.close();
                             } else {
+                                log.info("行：" + i + " 列：" + j);
+                                log.info("字符长度：" + sheet.getColumnWidth(cell.getColumnIndex()));
                                 cell.setCellValue((String) map.get(stringCellValue));
                             }
                         }
@@ -161,6 +204,64 @@ public class ReadExcel {
         return stringCellValue;
     }
 
+    /**
+     * 判断是否是合并单元格
+     * @param sheet
+     * @param row
+     * @param column
+     * @return
+     */
+    private int getValue(Sheet sheet, int row, int column) {
+        //获取合并单元格的总数，并循环每一个合并单元格，
+        int sheetMergeCount = sheet.getNumMergedRegions();
+        for (int i = 0; i < sheetMergeCount; i++) {
+            CellRangeAddress range = sheet.getMergedRegion(i);
+            int firstColumn = range.getFirstColumn();
+            int lastColumn = range.getLastColumn();
+            int firstRow = range.getFirstRow();
+            int lastRow = range.getLastRow();
+            //判断当前单元格是否在合并单元格区域内，是的话就是合并单元格
+            if ((row >= firstRow && row <= lastRow) && (column >= firstColumn && column <= lastColumn)) {
+                // 返回最后的column
+                return lastColumn;
+            }
+        }
+        //非合并单元格个返回空
+        return 0;
+    }
+
+    private List<Integer> insertImage(double imgWidth, double imgHeight, int cellWidth, float cellHeight) {
+        List<Integer> list = new ArrayList<>();
+        int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
+        int x = 2, y = 2;
+        double rate = imgWidth / imgHeight;
+        float rate1 = cellWidth / cellHeight;
+        if (rate > rate1) {
+            imgWidth = cellWidth - x * 2;
+            imgHeight = imgWidth / rate;
+            dx1 = 2;
+            dy1 = (int) ((cellHeight - imgHeight) / 2 + y);
+            dx2 = (int) (dx1 + imgWidth);
+            dy2 = (int) (dy1 + imgHeight);
+            list.add(dx1);
+            list.add(dy1);
+            list.add(dx2);
+            list.add(dy2);
+            return list;
+        } else {
+            imgHeight = cellHeight - y * 2;
+            imgWidth = rate * imgHeight;
+            dx1 = (int) ((cellWidth - imgWidth) / 2 + x);
+            dy1 = 2;
+            dx2 = (int) (dx1 + imgWidth);
+            dy2 = (int) (dy1 + imgHeight);
+            list.add(dx1);
+            list.add(dy1);
+            list.add(dx2);
+            list.add(dy2);
+            return list;
+        }
+    }
     private Map<String, Integer> insertImageToCell(String imageFile) {
         Map<String, Integer> map = new HashMap<>();
         BufferedImage bufferImg;

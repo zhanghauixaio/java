@@ -63,10 +63,11 @@ public class Barcode4j {
 
 
         // 精细度
-        final int dpi = 130;
+        final int dpi = 50;
         // module宽度
         final double moduleWidth = UnitConv.mm2pt(0.25d);
-        final double barHeight = UnitConv.mm2pt(5.1d);
+        final double barHeight = UnitConv.pt2mm(32d);
+        // System.out.println(UnitConv.p);
         // 配置对象
         bean.setModuleWidth(moduleWidth);
         // bean.setWideFactor(3);
@@ -74,11 +75,14 @@ public class Barcode4j {
         bean.setBarHeight(barHeight);
         // 白边显示
         bean.doQuietZone(true);
+        bean.setQuietZone(2.0d);
         // 字体大小
         bean.setFontSize(8d);
         // 支持的字体 "OCR-B,Helvetica,Arial";
         bean.setFontName("Arial");
-
+        System.out.println(bean.getBarWidth(1));
+        System.out.println(bean.getBarWidth(2));
+        System.out.println(moduleWidth);
         String format = "image/png";
         try {
 
