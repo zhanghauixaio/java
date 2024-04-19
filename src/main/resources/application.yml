@@ -10,3 +10,5 @@ spring:
     data-password:  123456
 mybatis-plus:
   config-location: classpath:mybatis-config.xml
+logging:
+  config: classpath:logback.xml
