@@ -1,20 +1,27 @@
 package com.seven.spring.controller;
 
+import com.seven.spring.bo.CategoryBo;
 import com.seven.spring.vo.User;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 public class TestController {
+    @Resource
+    private CategoryBo categoryBo;
+
     // @RequestMapping (value = "test", method = RequestMethod.GET)
     @GetMapping("test")
     public void test(@ModelAttribute("list") List<String> list, ModelMap modelMap) {
@@ -46,7 +53,15 @@ public class TestController {
         return user.toString();
     }
     @GetMapping("download")
-    public void download(@RequestParam(value = "date") LocalDate date){
+    public void download(@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(value = "date") LocalDate date){
         System.out.println(date);
+    }
+    @GetMapping("download1")
+    public void download1(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam(value = "timestamp") LocalDateTime date){
+        System.out.println(date);
+    }
+    @GetMapping("one")
+    public void getOne(){
+        System.out.println(categoryBo.getOne());
     }
 }

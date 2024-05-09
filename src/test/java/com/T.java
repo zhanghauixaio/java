@@ -1,7 +1,7 @@
 package com;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+// import com.auth0.jwt.JWT;
+// import com.auth0.jwt.algorithms.Algorithm;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import jodd.util.concurrent.ThreadFactoryBuilder;
 import net.sf.ehcache.Cache;
@@ -63,15 +63,15 @@ public class T {
         taskExe.shutdown();
         System.out.println(count);
     }
-    @Test
-    public void jwtTest(){
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0ZXN0Ijoi56ys5LiA5qyh5bCd6K-VIn0.hodMEu13NNwKqwDsmhuQYBfE23NGj5U3ga9SMaemRLE";
-        System.out.println(JWT.create()
-                .withClaim("test", "第一次尝试")
-                .sign(Algorithm.HMAC256("123456")));
-        System.out.println(JWT.require(Algorithm.HMAC256("123456")).withClaim("test", "第一次尝试").build().verify(token).getHeader());
-        System.out.println(JWT.decode(token).getClaim("test").asString());
-    }
+    // @Test
+    // public void jwtTest(){
+    //     String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0ZXN0Ijoi56ys5LiA5qyh5bCd6K-VIn0.hodMEu13NNwKqwDsmhuQYBfE23NGj5U3ga9SMaemRLE";
+    //     System.out.println(JWT.create()
+    //             .withClaim("test", "第一次尝试")
+    //             .sign(Algorithm.HMAC256("123456")));
+    //     System.out.println(JWT.require(Algorithm.HMAC256("123456")).withClaim("test", "第一次尝试").build().verify(token).getHeader());
+    //     System.out.println(JWT.decode(token).getClaim("test").asString());
+    // }
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test

@@ -1,14 +1,16 @@
 server:
-  port: 8888
+  port: 8080
 spring:
   application:
     name: test
   datasource:
     url: jdbc:mysql://localhost:3306/test?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-    data-username: root
-    data-password:  123456
+    username: root
+    password: 123456
 mybatis-plus:
-  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:/mybatis.mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   config: classpath:logback.xml
