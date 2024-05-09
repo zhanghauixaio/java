@@ -43,9 +43,10 @@
 
     </settings>
     <typeHandlers>
-        <typeHandler handler="com.seven.mybatis.typehandler.EnumHandler"
-                     javaType="com.seven.mybatis.enums.TypeEnum"
-                     jdbcType="VARCHAR"/>
+        <!--<typeHandler handler="com.seven.mybatis.typehandler.EnumHandler"-->
+        <!--             javaType="com.seven.mybatis.enums.TypeEnum"-->
+        <!--             jdbcType="VARCHAR"/>-->
+        <package name="com.seven.mybatis.typehandler"/>
     </typeHandlers>
     <plugins>
         <plugin interceptor="com.seven.mybatis.config.MybatisInterceptor">
@@ -69,6 +70,7 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com/seven/mybatis/mapper/CategoryMapper.xml" />
+        <!--<mapper resource="com/seven/mybatis/mapper/CategoryMapper.xml" />-->
+        <package name="com.seven.mybatis.mapper"/>
     </mappers>
 </configuration>
