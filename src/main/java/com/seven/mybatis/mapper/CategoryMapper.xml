@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seven.mybatis.mapper.CategoryMapper">
-    <insert id="insertCategory" parameterType="com.seven.mybatis.vo.Category">
-        insert into category (id, sn, name) values (#{id}, #{sn}, #{name})
+    <resultMap id="resultMap" type="com.seven.mybatis.vo.Category">
+        <id column="id" property="id" javaType="String" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" javaType="Boolean" jdbcType="VARCHAR" typeHandler="com.seven.mybatis.typehandler.MyBooleanTypeHandler"/>
+        <result column="name" property="name" javaType="com.seven.mybatis.enums.TypeEnum" jdbcType="VARCHAR" typeHandler="com.seven.mybatis.typehandler.EnumHandler"/>
+    </resultMap>
+    <insert id="insertCategory">
+        insert into category (id, sn, name) values (#{category.id}, #{category.sn, typeHandler=com.seven.mybatis.typehandler.MyBooleanTypeHandler}, #{category.name, typeHandler=com.seven.mybatis.typehandler.EnumHandler})
     </insert>
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
-    <select id="selectCategoryById" resultType="com.seven.mybatis.vo.Category">
-        select * from category
+    <select id="selectCategoryById" resultMap="resultMap">
+        select * from category t1
         <where>
             <if test="i!= null">
-                id = #{i}
+                t1.id = #{i}
             </if>
         </where>
     </select>

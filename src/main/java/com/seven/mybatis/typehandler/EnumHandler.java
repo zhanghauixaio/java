@@ -19,8 +19,7 @@ public class EnumHandler implements TypeHandler<TypeEnum> {
     }
     @Override
     public void setParameter(PreparedStatement ps, int i, TypeEnum parameter, JdbcType jdbcType) throws SQLException {
-        ps.setString(i, parameter.name());
-        System.out.println("setParameter");
+        ps.setString(i, parameter.name() + "mhh");
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface CategoryMapper {
     Category selectCategoryById(@Param("i") String i);
 
     List<Category> pagination(@Param("offset") Integer offset, @Param("limit") Integer limit);
-    void insertCategory(Category category);
+    void insertCategory(@Param("category") Category category);
     // @MapKey("id")
     // Map<String, Object> selectMap();
 }
