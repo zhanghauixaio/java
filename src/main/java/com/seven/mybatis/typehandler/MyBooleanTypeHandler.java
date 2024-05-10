@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 @MappedTypes({Boolean.class})
-@MappedJdbcTypes({JdbcType.VARCHAR})
+@MappedJdbcTypes(value = {JdbcType.VARCHAR}, includeNullJdbcType = true)
 public class MyBooleanTypeHandler extends BaseTypeHandler<Boolean> {
 
     @Override
