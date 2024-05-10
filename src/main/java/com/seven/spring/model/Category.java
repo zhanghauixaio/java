@@ -14,5 +14,5 @@ public class Category {
     private String id;
 
     @TableField("sn")
-    private String sn;
+    private Boolean sn;
 }

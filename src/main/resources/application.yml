@@ -12,5 +12,6 @@ mybatis-plus:
   mapper-locations: classpath*:/mybatis.mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-logging:
-  config: classpath:logback.xml
+  type-handlers-package: com.seven.mybatis.typehandler
+#logging:
+#  config: classpath:logback.xml

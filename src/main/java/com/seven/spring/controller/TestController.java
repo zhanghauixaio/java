@@ -62,6 +62,7 @@ public class TestController {
     }
     @GetMapping("one")
     public void getOne(){
+        categoryBo.insertInto();
         System.out.println(categoryBo.getOne());
     }
 }

@@ -8,6 +8,8 @@ import com.seven.spring.mapper.CategoryExtMapper;
 import com.seven.spring.model.CategoryExt;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class CategoryBoImpl extends ServiceImpl<CategoryExtMapper, CategoryExt> implements CategoryBo {
 
@@ -16,5 +18,14 @@ public class CategoryBoImpl extends ServiceImpl<CategoryExtMapper, CategoryExt> 
         LambdaQueryWrapper<CategoryExt> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(CategoryExt::getId, "01");
         return baseMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public void insertInto() {
+        CategoryExt categoryExt = new CategoryExt();
+        categoryExt.setId(UUID.randomUUID().toString());
+        categoryExt.setSn(true);
+        categoryExt.setName("hhoa");
+        baseMapper.insert(categoryExt);
     }
 }

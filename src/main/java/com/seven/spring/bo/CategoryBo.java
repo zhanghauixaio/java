@@ -6,4 +6,5 @@ import com.seven.spring.model.CategoryExt;
 
 public interface CategoryBo extends IService<CategoryExt> {
     CategoryExt getOne();
+    void insertInto();
 }
