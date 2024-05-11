@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seven.mybatis.mapper.CategoryMapper">
     <resultMap id="resultMap" type="com.seven.mybatis.vo.Category">
-        <id column="id" property="id" javaType="String" jdbcType="VARCHAR"/>
-        <result column="sn" property="sn" javaType="Boolean" jdbcType="VARCHAR" typeHandler="com.seven.mybatis.typehandler.MyBooleanTypeHandler"/>
-        <result column="name" property="name" javaType="com.seven.mybatis.enums.TypeEnum" jdbcType="VARCHAR" typeHandler="com.seven.mybatis.typehandler.EnumHandler"/>
+        <id column="id" property="id" />
+        <result column="sn" property="sn" />
+        <result column="name" property="name" />
     </resultMap>
     <insert id="insertCategory">
-        insert into category (id, sn, name) values (#{category.id}, #{category.sn, typeHandler=com.seven.mybatis.typehandler.MyBooleanTypeHandler}, #{category.name, typeHandler=com.seven.mybatis.typehandler.EnumHandler})
+        insert into category (id, sn, name) values (#{category.id}, #{category.sn}, #{category.name})
     </insert>
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
     <select id="selectCategoryById" resultMap="resultMap">

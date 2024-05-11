@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
 public class Category {
     private String id;
-    private Boolean sn;
+    private List<String> sn;
+    // private String sn;
     private TypeEnum name;
 }

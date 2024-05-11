@@ -11,6 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class Mybatis {
@@ -25,8 +28,9 @@ public class Mybatis {
             sqlSession = sqlSessionFactory.openSession();
             CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
             Category category = new Category();
-            category.setId("002");
-            category.setSn(Boolean.TRUE);
+            List<String> list = Arrays.asList("aha", "ahofwe");
+            category.setId("001");
+            category.setSn(list);
             category.setName(TypeEnum.NO);
             categoryMapper.insertCategory(category);
             sqlSession.commit();
@@ -35,7 +39,9 @@ public class Mybatis {
             // System.out.println(categoryMapper.pagination(1, 10));
             // Map<String, Object> map = categoryMapper.selectMap();
         }finally {
-            sqlSession.close();
+            if (null != sqlSession) {
+                sqlSession.close();
+            }
         }
     }
 }
