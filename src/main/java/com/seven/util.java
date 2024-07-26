@@ -25,11 +25,15 @@ public class util {
                     listDirectory(file);
                 else{ // 删除以 lastUpdated 结尾的文件
                     String fileName = file.getName();
+                    // 删除.lastUpdated文件(失败的jar包)
                     boolean isLastupdated = fileName.toLowerCase().endsWith("lastupdated");
-                    if (isLastupdated){
+                    // 删除_remote.repositories文件
+                    boolean isRepositories = fileName.toLowerCase().endsWith("repositories");
+                    if (isLastupdated || isRepositories){
                         boolean is_delete = file.delete();
                         System.out.println("删除的文件名 => " + file.getName() + "  || 是否删除成功？ ==> " + is_delete);
                     }
+
                 }
             }
         }
