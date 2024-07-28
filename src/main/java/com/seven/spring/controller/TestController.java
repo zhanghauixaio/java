@@ -1,8 +1,12 @@
 package com.seven.spring.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.seven.spring.bo.CategoryBo;
 import com.seven.spring.vo.User;
+import com.seven.spring.vo.User2;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -38,15 +42,16 @@ public class TestController {
         System.out.println(cookie.getValue());
         System.out.println(test);
     }
-    @ModelAttribute("user")
-    public User addAccount() {
-        return new User("jz","123");
-    }
+    // @ModelAttribute("user")
+    // public User addAccount() {
+    //     return new User("jz","123");
+    // }
 
-    @RequestMapping (value = "user", method = RequestMethod.GET)
-    public String helloWorld(User user, ModelMap model) {
+    @RequestMapping(value = "user", method = RequestMethod.POST)
+    public String helloWorld(@ModelAttribute("user") User user, ModelMap model) {
         System.out.println(user.getName());
-
+        User2 user2 = BeanUtil.copyProperties(user, User2.class);
+        System.out.println(user2);
         user.setName("jizhou");
         User user1 = (User) model.get("user");
         System.out.println(user1.getName());
@@ -60,9 +65,15 @@ public class TestController {
     public void download1(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam(value = "timestamp") LocalDateTime date){
         System.out.println(date);
     }
+    @DS("slave_1")
     @GetMapping("one")
     public void getOne(){
         categoryBo.insertInto();
         System.out.println(categoryBo.getOne());
+    }
+
+    @PostMapping("all")
+    public void all(@RequestBody List<String> ids) {
+        categoryBo.listAll(ids);
     }
 }

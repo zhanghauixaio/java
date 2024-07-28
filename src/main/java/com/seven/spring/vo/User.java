@@ -5,13 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @TableName("user")
 public class User {
     @TableField(exist = false)
     private String name;
-    private String age;
+    private Integer age;
 }
