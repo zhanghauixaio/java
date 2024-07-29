@@ -21,6 +21,8 @@ mybatis-plus:
   mapper-locations: classpath*:/mybatis.mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
   type-handlers-package: com.seven.mybatis.typehandler
+#  type-enums-package: com.seven.spring.enums
 #logging:
 #  config: classpath:logback.xml
