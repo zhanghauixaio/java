@@ -3,26 +3,31 @@ server:
 spring:
   application:
     name: test
+#  datasource:
+#    dynamic:
+#      primary: master
   datasource:
-    dynamic:
-      primary: master
-      datasource:
-        master:
-          url: jdbc:mysql://localhost:3306/test?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=UTC
-          driver-class-name: com.mysql.cj.jdbc.Driver
-          username: root
-          password: 123456
-        slave_1:
-          url: jdbc:postgresql://localhost:5432/postgres
-          driver-class-name: org.postgresql.Driver
-          username: postgres
-          password: postgres
+    master:
+      jdbc-url: jdbc:mysql://localhost:3306/test?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+    slave:
+      jdbc-url: jdbc:postgresql://localhost:5432/postgres
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: postgres
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        maxLifetime: 1765000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+        maximumPoolSize: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+        connection-test-query: select 1 from dual
 mybatis-plus:
-  mapper-locations: classpath*:/mybatis.mapper/*.xml
+  mapper-locations: classpath*:/mybatis/mapper/**/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
   type-handlers-package: com.seven.mybatis.typehandler
-#  type-enums-package: com.seven.spring.enums
+  type-enums-package: com.seven.spring.enums
 #logging:
 #  config: classpath:logback.xml
