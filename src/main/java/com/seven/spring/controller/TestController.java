@@ -1,8 +1,11 @@
 package com.seven.spring.controller;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.baomidou.dynamic.datasource.annotation.DS;
+// import com.baomidou.dynamic.datasource.annotation.DS;
+import com.seven.spring.aop.Datasource;
 import com.seven.spring.bo.CategoryBo;
+import com.seven.spring.config.DatasourceHolder;
+import com.seven.spring.model.CategoryExt;
 import com.seven.spring.vo.User;
 import com.seven.spring.vo.User2;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -65,15 +68,15 @@ public class TestController {
     public void download1(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") @RequestParam(value = "timestamp") LocalDateTime date){
         System.out.println(date);
     }
-    @DS("slave_1")
     @GetMapping("one")
     public void getOne(){
         categoryBo.insertInto();
+
         System.out.println(categoryBo.getOne());
     }
 
     @PostMapping("all")
-    public void all(@RequestBody List<String> ids) {
-        categoryBo.listAll(ids);
+    public List<CategoryExt> all(@RequestBody List<String> ids) {
+        return categoryBo.listAll(ids);
     }
 }
