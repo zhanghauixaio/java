@@ -1,4 +1,4 @@
-package com.seven.word;
+package com.seven.office.word;
 
 import com.deepoove.poi.XWPFTemplate;
 import com.deepoove.poi.data.Pictures;

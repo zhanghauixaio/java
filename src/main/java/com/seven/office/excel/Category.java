@@ -1,4 +1,4 @@
-package com.seven.excel;
+package com.seven.office.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Getter;

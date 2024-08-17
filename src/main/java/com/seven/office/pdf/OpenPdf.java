@@ -1,4 +1,4 @@
-package com.seven.pdf;
+package com.seven.office.pdf;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.BaseFont;
